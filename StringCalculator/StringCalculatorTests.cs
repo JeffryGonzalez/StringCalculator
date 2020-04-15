@@ -12,7 +12,7 @@ namespace StringCalculator
         Calculator Calculator;
         public StringCalculatorTests()
         {
-            Calculator = new Calculator(new Mock<ILogger>().Object); // You big dummy!
+            Calculator = new Calculator(new Mock<ILogger>().Object, null); // You big dummy!
         }
         [Fact]
         public void EmptyStringReturnsZero()

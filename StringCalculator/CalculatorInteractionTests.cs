@@ -15,7 +15,7 @@ namespace StringCalculator
         public void AnswersAreLogged(string input, string expected)
         {
             var mockedLogger = new Mock<ILogger>();
-            var calculator = new Calculator(mockedLogger.Object);
+            var calculator = new Calculator(mockedLogger.Object, null);
 
             calculator.Calculate(input);
 

@@ -7,10 +7,12 @@ namespace StringCalculator
     public class Calculator
     {
         private ILogger Logger;
+        private IWebService WebService;
 
-        public Calculator(ILogger logger)
+        public Calculator(ILogger logger, IWebService webService)
         {
-            this.Logger = logger;
+            Logger = logger;
+            WebService = webService;
         }
 
         public int Calculate(string numbers)
@@ -26,7 +28,15 @@ namespace StringCalculator
             {
                 answer = numbers == "" ? 0 : int.Parse(numbers);
             }
-            Logger.Write(answer.ToString());
+            try
+            {
+                Logger.Write(answer.ToString());
+            }
+            catch (LoggerFailureException ex)
+            {
+
+                WebService.LoggingFailed(ex.Message);
+            }
             return answer;
         }
     }
