@@ -6,20 +6,28 @@ namespace StringCalculator
 {
     public class Calculator
     {
-        
+        private ILogger Logger;
+
+        public Calculator(ILogger logger)
+        {
+            this.Logger = logger;
+        }
 
         public int Calculate(string numbers)
         {
+            int answer = 0;
             if (numbers.Contains(','))
             {
-                return numbers.Split(',')
+                answer = numbers.Split(',')
                      .Select(n => int.Parse(n))
                      .Sum();
             }
             else
             {
-                return numbers == "" ? 0 : int.Parse(numbers);
+                answer = numbers == "" ? 0 : int.Parse(numbers);
             }
+            Logger.Write(answer.ToString());
+            return answer;
         }
     }
 }

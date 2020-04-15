@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
@@ -7,12 +8,18 @@ namespace StringCalculator
 {
     public class StringCalculatorTests
     {
+
+        Calculator Calculator;
+        public StringCalculatorTests()
+        {
+            Calculator = new Calculator(new Mock<ILogger>().Object); // You big dummy!
+        }
         [Fact]
         public void EmptyStringReturnsZero()
         {
-            var calculator = new Calculator();
+        
 
-            int answer = calculator.Calculate("");
+            int answer =Calculator.Calculate("");
 
             Assert.Equal(0, answer);
         }
@@ -23,9 +30,8 @@ namespace StringCalculator
         [InlineData("42", 42)]
         public void SingleNumber(string numbers, int expected)
         {
-            var calculator = new Calculator();
 
-            int answer = calculator.Calculate(numbers);
+            int answer = Calculator.Calculate(numbers);
 
             Assert.Equal(expected, answer);
         }
@@ -36,9 +42,8 @@ namespace StringCalculator
         [InlineData("10,2", 12)]
         public void CommaSepTwoNumbers(string numbers, int expected)
         {
-            var calculator = new Calculator();
 
-            int answer = calculator.Calculate(numbers);
+            int answer = Calculator.Calculate(numbers);
             Assert.Equal(expected, answer);
         }
 
@@ -47,10 +52,10 @@ namespace StringCalculator
         [InlineData("1,2,3", 6)]
         public void Arbitrary(string numbers, int expected)
         {
-            var calculator = new Calculator();
-
-            int answer = calculator.Calculate(numbers);
+            int answer = Calculator.Calculate(numbers);
             Assert.Equal(expected, answer);
         }
+
+        
     }
 }
