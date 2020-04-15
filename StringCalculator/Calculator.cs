@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace StringCalculator
@@ -11,11 +12,9 @@ namespace StringCalculator
         {
             if (numbers.Contains(','))
             {
-                var regex = new Regex(@"(\d+),(\d+)");
-                var groups = regex.Matches(numbers)[0];
-                var num1 = int.Parse(groups.Groups[1].Value);
-                var num2 = int.Parse(groups.Groups[2].Value);
-                return num1 + num2;
+                return numbers.Split(',')
+                     .Select(n => int.Parse(n))
+                     .Sum();
             }
             else
             {

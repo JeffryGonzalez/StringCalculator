@@ -41,5 +41,16 @@ namespace StringCalculator
             int answer = calculator.Calculate(numbers);
             Assert.Equal(expected, answer);
         }
+
+        [Theory]
+        [InlineData("1,2,3,4,5,6,7,8,9", 45)]
+        [InlineData("1,2,3", 6)]
+        public void Arbitrary(string numbers, int expected)
+        {
+            var calculator = new Calculator();
+
+            int answer = calculator.Calculate(numbers);
+            Assert.Equal(expected, answer);
+        }
     }
 }
