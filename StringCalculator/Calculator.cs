@@ -17,8 +17,10 @@ namespace StringCalculator
 
         public int Calculate(string numbers)
         {
+            if (numbers.isEmptyString()) { return 0; }
+
             int answer = 0;
-            if (numbers.Contains(','))
+            if (numbers.isDelimited())
             {
                 answer = numbers.Split(',')
                      .Select(n => int.Parse(n))
@@ -26,7 +28,7 @@ namespace StringCalculator
             }
             else
             {
-                answer = numbers == "" ? 0 : int.Parse(numbers);
+                answer = int.Parse(numbers);
             }
             try
             {
@@ -39,5 +41,7 @@ namespace StringCalculator
             }
             return answer;
         }
+
+
     }
 }

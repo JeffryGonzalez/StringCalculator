@@ -17,8 +17,6 @@ namespace StringCalculator
         [Fact]
         public void EmptyStringReturnsZero()
         {
-        
-
             int answer =Calculator.Calculate("");
 
             Assert.Equal(0, answer);
